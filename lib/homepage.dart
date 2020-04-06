@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,6 +8,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  String result="Come on! Scan Something.";
+
+  Future scanQR() async{
+
+    try{  
+        String qrResult=await BarcodeScanner.scan();
+
+        setState(() {
+          result=qrResult;
+        });
+    }on PlatformException catch (e){
+      if(e.code==BarcodeScanner.CameraAccessDenied){
+        setState(() {
+          result="Oops! Camera Permission Required.";
+        });
+      }
+      else{
+        setState(() {
+          result="Ouch, an unknown error! $e";
+        });
+      } 
+    }
+    on FormatException catch (e){
+      setState((){
+        result="Come On! Scan Something.";
+      });
+    }catch (e){
+      setState(() {
+          result="Ouch, an unknown error! $e";
+        });
+    }
+
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,14 +92,19 @@ class _HomePageState extends State<HomePage> {
                   ),),
 
             Expanded(child: Center(
-              child: Container(
-                child: Text("Come on! Scan Something",
-                style:TextStyle(
-                  color:Colors.grey[600],
-                  fontSize: 16
-                  )
-                  ),
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal:24.0),
+                child: Container(
+                  child: Text(result,
+                  textAlign: TextAlign.justify,
+                  style:TextStyle(
+                    
+                    color:Colors.grey[600],
+                    fontSize: 16
+                    )
+                    ),
+                    ),
+              ),
             ),
             )
 
@@ -80,13 +121,12 @@ class _HomePageState extends State<HomePage> {
           
           icon:Icon(Icons.search),
           label:Text("Scan"),
-          onPressed: (){
-
-          },
+          onPressed: scanQR,
+              )
+          
           
         ),
         
-      ),
     );
   }
 }
