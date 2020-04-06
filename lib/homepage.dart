@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 
+import 'about.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -51,13 +53,16 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
     
           IconButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutPage()));
+            },
             icon:Icon(Icons.info,color:Colors.grey[200])
           )
           
         ],
         elevation: 0,
         title:Text("QR SCANNER"),
+        backgroundColor:Color(0xFF21BFBD)
         ),
       backgroundColor: Colors.white,
       body:Container(
@@ -69,7 +74,7 @@ class _HomePageState extends State<HomePage> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height*0.35,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xFF21BFBD),
                 borderRadius:BorderRadius.only(
                   bottomLeft:Radius.circular(30),
                   bottomRight: Radius.circular(30)
@@ -118,7 +123,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: Transform.scale(
               scale:1.1,
               child: FloatingActionButton.extended(
-          
+          backgroundColor: Color(0xFF21BFBD),
           icon:Icon(Icons.search),
           label:Text("Scan"),
           onPressed: scanQR,
