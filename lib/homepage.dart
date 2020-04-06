@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -77,7 +78,7 @@ class _HomePageState extends State<HomePage> {
               scale:1.1,
               child: FloatingActionButton.extended(
           
-          icon:Icon(Icons.add_a_photo),
+          icon:Icon(Icons.search),
           label:Text("Scan"),
           onPressed: (){
 
