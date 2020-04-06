@@ -9,19 +9,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        
-        actions: <Widget>[
-    
-          IconButton(
-            onPressed: (){},
-            icon:Icon(Icons.info,color:Colors.grey[200])
-          )
-          
-        ],
-        elevation: 0,
-        title:Text("QR SCANNER"),
-        ),
+      
       backgroundColor: Colors.white,
       body:Container(
           alignment: Alignment.topCenter,
